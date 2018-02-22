@@ -79,7 +79,11 @@ fun Owins(Lf(0)) = 0
 | Owins(Lf(2)) = 0
 | Owins(Lf(1)) = 1
 | Owins(Br(xs, xss)) = Sum (map (fn(y)=> Owins(y))(xss));
-(*counts 1 if a game is won by O, in case of a big tree, it takes all the trees from it
-, i.e. from the list of trees, recursively applied Owins to them and sums them to give 
-the total number of games won by O. Result is 131184 for the whole tree of games,
-wikipedia gives exactly the same result*)
+fun Xwins(Lf(0)) = 0
+| Xwins(Lf(2)) = 1
+| Xwins(Lf(1)) = 0
+| Xwins(Br(xs, xss)) = Sum (map (fn(y)=> Xwins(y))(xss));
+fun drawn(Lf(0)) = 1
+| drawn(Lf(1)) = 0
+| drawn(Lf(2)) = 0
+| drawn(Br(xs, xss)) = Sum (map (fn(y)=> drawn(y))(xss));
